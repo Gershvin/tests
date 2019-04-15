@@ -1,19 +1,21 @@
 import re
 
 def regular(text): #
-    result = re.sub(r'\([^)]*\)', '', text)
+    result = re.sub(r'\([^)]*\)', '', text) #напрямую ищется элемент вне скобок с помощью регулярных выражений
     return result
 
-def unregular(text): #первый кет закрывает последний бра
-    bra = []
-    ket = []
+def unregular(text): #удаление текста из скобок без регулярных выражений
+    """
+Логика функции: Бра - открывающая скобка, Кет - закрывающая скобка
+Последний кет закрывает текст перед последний бра
+
+Программа удаляет текст в скобках, если:
+1) в тексте встретилась первая бра
+2) если бра = кет
+
+    """
     Bra = 0
     Ket = 0
-    for i in range(text.find('('), len(text)):
-        if text[i-1] == '(':
-            bra.append(i)
-        elif text[i-1] == ')':
-            ket.append(i)
     for i in range(len(text)):
         if text[i] == '(':
             Bra += 1
